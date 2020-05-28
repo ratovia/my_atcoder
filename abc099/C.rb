@@ -9,21 +9,34 @@
   # PI = Math::PI
   # 高さh = a * Math.sin(w / 180.0 * Math::PI)
   # 底辺 = a * Math.cos(w / 180.0 * Math::PI)
-  def chmax(a, b) a > b ? a : b end
-  INF = Float::INFINITY
-  # def chmin(a, b) a < b ? a : b end
-n = gets.to_i
-array = [*1..n].map { |_| gets.split.map(&:to_i) }
-dp = []
-dp[0] = [0,0,0]
-n.times {dp.push([-INF]*3)}
+  # def chmax(a, b) a > b ? a : b end
+INF = Float::INFINITY
+def chmin(a, b) a < b ? a : b end
 
-n.times do |i|
-  3.times do |j|
-    3.times do |k|
-      dp[i+1][j] = chmax(dp[i+1][j], dp[i][k]+ array[i][j]) if j != k || i == 0
+n = gets.to_i
+
+dp = [INF] * (n+9+1)
+
+patern = [1]
+t = 1
+while 6 ** t < 10 ** 6  
+  patern.push(6 ** t)
+  t += 1
+end 
+
+t = 1
+while 9 ** t < 10 ** 6  
+  patern.push(9 ** t)
+  t += 1
+end 
+patern.sort!
+dp[0] = 0
+(n+1).times do |i|
+  patern.each do |j|
+    if (i+j) <= n
+      dp[i + j] = chmin(dp[i+j], dp[i]+1)
     end
   end
 end
 
-puts dp[n].max
+p dp[n]

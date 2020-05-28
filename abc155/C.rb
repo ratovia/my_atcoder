@@ -10,20 +10,25 @@
   # 高さh = a * Math.sin(w / 180.0 * Math::PI)
   # 底辺 = a * Math.cos(w / 180.0 * Math::PI)
   def chmax(a, b) a > b ? a : b end
-  INF = Float::INFINITY
+  # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
-n = gets.to_i
-array = [*1..n].map { |_| gets.split.map(&:to_i) }
-dp = []
-dp[0] = [0,0,0]
-n.times {dp.push([-INF]*3)}
 
-n.times do |i|
-  3.times do |j|
-    3.times do |k|
-      dp[i+1][j] = chmax(dp[i+1][j], dp[i][k]+ array[i][j]) if j != k || i == 0
-    end
+require 'pry'
+n = gets.to_i
+# a,b,c = gets.split.map(&:to_i)
+
+s = [*1..n].map { |_| gets.chomp }
+binding.pry
+g = s.group_by(&:itself).map{|k,v| [k, v.count]}
+
+max_str = []
+max_num = 0
+
+g.each do |line|
+  if max_num < line[1]
+    max_num = line[1]
+    max_str.push(line[0])
+  elsif max_num = line[1]
+    max_str.push()
   end
 end
-
-puts dp[n].max

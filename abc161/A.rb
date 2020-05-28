@@ -14,6 +14,6 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s,w = gets.split.map(&:to_i)
+x,y,z = gets.split.map(&:to_i)
 
-puts s <= w ? "unsafe" : "safe" 
+puts "#{z} #{x} #{y}"
