@@ -14,6 +14,20 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s,w = gets.split.map(&:to_i)
+h1,m1,h2,m2,k = gets.split.map(&:to_i)
+if m2 - m1 < 0
+  min = 60 - m1 + m2
+  hour = (h2-1 - h1)*60
+else
+  min = m2 - m1
+  hour = (h2 - h1)*60
+end
+time = hour + min
 
-puts s <= w ? "unsafe" : "safe"
+yo = time - k
+
+if yo < 0
+  puts 0
+else
+  puts yo
+end

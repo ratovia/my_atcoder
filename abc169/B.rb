@@ -14,6 +14,16 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s,w = gets.split.map(&:to_i)
+n = gets.to_i
+a = gets.split.map(&:to_i).sort
+INF = 10 ** 18
+sum = 1
+a.each do |i|
+  sum *= i
+  if sum > INF
+    sum = -1
+    break
+  end
+end
 
-puts s <= w ? "unsafe" : "safe"
+puts sum

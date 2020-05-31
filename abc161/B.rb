@@ -14,5 +14,7 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-n = gets.to_i
-a,b,c = gets.split.map(&:to_i)
+_,m = gets.split.map(&:to_i)
+a = gets.split.map(&:to_i)
+s = a.sum
+puts a.select{|x| x > (s/ (4 * m))}.length >= m ? "Yes" : "No"
