@@ -10,26 +10,40 @@
   # 高さh = a * Math.sin(w / 180.0 * Math::PI)
   # 底辺 = a * Math.cos(w / 180.0 * Math::PI)
 def chmax(a, b) a > b ? a : b end
-INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
+# 3 5
+# 1 20
+# 2 30
+# 3 40
 n,w = gets.split.map(&:to_i)
-array = [*1..n].map { |_| gets.split.map(&:to_i) }
+wv = [*1..n].map { |_| gets.split.map(&:to_i) }
+dp = [0] * (w+1)
 
-dp = []
-dp[0] = [0]
-n.times {dp.push([-INF])}
-n.times do |i|
-  sum_w = 0
-  while sum_w < w
-    # iを選ぶとき
-    dp[i+1][sum_w] = chmax(dp[i+1][sum_w], dp[i][sum_w + array[i][0]] + array[i][1]) 
+# dp[i] :- 重さの合計がiの時の価値の最大値
 
-    # iを選ばないとき
-    dp[i+1] = chmax(dp[i+1][sum_w], dp[i][sum_w]) 
-    
+
+0.upto(n-1) do |k|
+  lw,lv = wv[k]
+  w.downto(lw) do |i|
+    dp[i] = chmax(dp[i], dp[i-lw] + lv)
   end
-  dp[i+1] = chmax(dp[i+1], dp[i] + array[1][1]) 
 end
 
-puts dp[n][w]
+puts dp.max
+
+
+
+# 2**n
+# a b c
+# 0 0 0
+# 0 0 1
+# 0 1 0
+# 0 1 1
+
+# dp[i] dp[i+1] + toru
+#       dp[i+1] + toranai
+
+#       iのこすう(n) * 
+
+# O(wn) = 10**5 * 100

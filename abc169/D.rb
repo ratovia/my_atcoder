@@ -14,26 +14,20 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 require 'prime'
+require 'set'
 n = gets.to_i
-i = 2
+s = Set.new
 count = 0
-while true 
-  p = Prime.each(i).last
-  e = 1
-  while p ** e < n
-    if n % p ** e == 0
-      z = p ** e
-      n = n / z
-      count = count + 1
-      break
+temp = n
+n.prime_division.each do |p,e|
+  1.upto(e) do |i|
+    x = i
+    z = p ** x
+    next if temp % z != 0  
+    if s.add?(z)
+      temp = temp / z
+      count += 1
     end
-    e += 1
   end
-
-  if n == 1
-    break
-  end
-  i = i + 1
 end
-
 puts count
