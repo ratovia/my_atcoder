@@ -13,40 +13,44 @@
   # def chmax(a, b) a > b ? a : b end
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
-s = gets.chomp
-t = gets.chomp
 
-sc = s.codepoints
-tc = t.codepoints
+card = []
+3.times {card << gets.split.map(&:to_i)}
 
-dp = Array.new(s.size + 1) { Array.new(t.size + 1, 0) }
-0.upto(s.length - 1) do |i|
-  dpi1 = dp[i+1]
-  dpi0 = dp[i]
-  0.upto(t.length - 1) do |j|
-    if (sc[i] == tc[j]) 
-      dpi1[j+1] =  dpi0[j] + 1
-    else
-      dpi1[j+1] = dpi0[j+1]
-      dpi1[j+1] = dpi1[j] if dpi1[j+1] < dpi1[j]
+n = gets.to_i
+hits = []
+n.times {hits << gets.to_i}
+
+
+hits.each do |h|
+  3.times do |i|
+    3.times do |j|
+      if h == card[i][j]
+        card[i][j] = 0
+      end
     end
   end
 end
 
-sl = s.length
-tl = t.length
-
-res = ""
-while sl > 0 && tl > 0
-  if dp[sl][tl] == dp[sl-1][tl]
-    sl -= 1
-  elsif dp[sl][tl] == dp[sl][tl-1]
-    tl -= 1
-  else
-    res << s[sl-1]
-    sl -= 1
-    tl -= 1
+flag = false
+tcard = card.transpose
+3.times do |k|
+  if card[k].inject(:+) == 0 || tcard[k].inject(:+) == 0
+    flag = true
   end
 end
 
-puts res.reverse
+if card[0][0] == 0 && card[1][1] == 0 && card[2][2] == 0
+  flag = true
+end
+
+if card[0][2] == 0 && card[1][1] == 0 && card[2][0] == 0
+  flag = true
+end
+
+# puts flag ? "Yes" : "No"
+if flag
+  puts "Yes"
+else
+  puts "No"
+end

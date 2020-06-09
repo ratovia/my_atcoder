@@ -11,53 +11,20 @@
   # PI = Math::PI
   # 高さ = a * Math.sin(w / 180.0 * Math::PI), 底辺 = a * Math.cos(w / 180.0 * Math::PI)
   # def chmax(a, b) a > b ? a : b end
-  # INF = Float::INFINITY
-  # def chmin(a, b) a < b ? a : b end
+  INF = Float::INFINITY
+  def chmin(a, b) a < b ? a : b end
 
-t = gets.to_i
+# 1000 2000 5000 4 3
+# 1000 2000 5000 3 4
+a,b,c,x,y = gets.split.map(&:to_i)
 
-line = []
-t.times do |i|
-  line << gets.split.map(&:to_i)
+if x < y
+  x,y = y,x
+  a,b = b,a
 end
 
-pp line
 
-n = line[0]
-dp = Hash.new(INF)
-cur = 0
-dp[cur] = 0
-while dp[n] != INF
-  dp[cur+]
-end
-
-1
-9
-0 0 1 0 0 0 0 2 3
-001000000
-
-3 2 0 0 0 0 1 0 0 
-000000100
-
-3 = 2 1 = 0 1  0 
-
-
-1
-5
-0 5 2 0 7 5
-111100
-1
-
-
-5 7 0 2 5 0 0
-0 0 1 1 1 1
-
-
-0
-0or5
-
-x ^ 7 = 0or5 
-x = 7or2 
-
-x ^ 0 = 7or2
-x = 7or2
+min_mix = chmin(a+b,2*c)
+min_a = chmin(a, 2*c)
+s = min_mix * y + (x-y)*min_a
+puts s
