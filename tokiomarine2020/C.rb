@@ -1,6 +1,6 @@
 ### SNIPPET
   # n = gets.split.map(&:to_i)
-  
+  # array = n.times.map { gets.split.map(&:to_i) }
   # [].all?(&:even?)
   # a = [*1..m].repeated_combination(n).to_a
   # [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
@@ -11,27 +11,27 @@
   # PI = Math::PI
   # 高さ = a * Math.sin(w / 180.0 * Math::PI), 底辺 = a * Math.cos(w / 180.0 * Math::PI)
   # def chmax(a, b) a > b ? a : b end
-INF = Float::INFINITY
-def chmin(a, b) a < b ? a : b end
-
-n,m,x = gets.split.map(&:to_i)
-
-book_list = n.times.map { gets.split.map(&:to_i) }
-
-min = INF
-0.upto(2 ** n) do |i|
-  select_book_cost = 0
-  select_book_skill = Array.new(m, 0)
-  n.times do |j| 
-    if i[j] == 1
-      select_book_cost += book_list[j][0]
-
-      m.times do |k|
-        select_book_skill[k] += book_list[j][k]
-      end
-    end
+  # INF = Float::INFINITY
+  # def chmin(a, b) a < b ? a : b end
+n, k = gets.split.map(&:to_i)
+a = gets.split.map(&:to_i)
+imos = nil
+k.times do
+  imos = Array.new(n,0)
+  a.each_with_index do |ele,i|
+    min = (i-ele) > 0 ? i-ele : 0
+    max = (i+ele+1) < n ? i+ele+1 : n
+    imos[min] += 1
+    imos[max] -= 1 if max < n
   end
-  chmin(min, select_book_cost) if select_book_skill.all?{|skill| skill >= x}
+  
+  a = imos
+  0.upto(n-2) do |j|
+    a[j+1] += a[j]
+  end
+  break if a.all?{|x|x==n}
 end
 
-puts min != INF ? min : -1
+puts a.join(" ")
+
+

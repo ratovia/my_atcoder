@@ -1,6 +1,6 @@
 ### SNIPPET
   # n = gets.split.map(&:to_i)
-  
+  # array = n.times.map { gets.split.map(&:to_i) }
   # [].all?(&:even?)
   # a = [*1..m].repeated_combination(n).to_a
   # [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
@@ -11,27 +11,25 @@
   # PI = Math::PI
   # 高さ = a * Math.sin(w / 180.0 * Math::PI), 底辺 = a * Math.cos(w / 180.0 * Math::PI)
   # def chmax(a, b) a > b ? a : b end
-INF = Float::INFINITY
-def chmin(a, b) a < b ? a : b end
+  # INF = Float::INFINITY
+  # def chmin(a, b) a < b ? a : b end
 
-n,m,x = gets.split.map(&:to_i)
+a,v = gets.split.map(&:to_i)
+b,w = gets.split.map(&:to_i)
+t = gets.to_i
 
-book_list = n.times.map { gets.split.map(&:to_i) }
 
-min = INF
-0.upto(2 ** n) do |i|
-  select_book_cost = 0
-  select_book_skill = Array.new(m, 0)
-  n.times do |j| 
-    if i[j] == 1
-      select_book_cost += book_list[j][0]
-
-      m.times do |k|
-        select_book_skill[k] += book_list[j][k]
-      end
-    end
-  end
-  chmin(min, select_book_cost) if select_book_skill.all?{|skill| skill >= x}
+if a < b
+  at = a + v*t
+  bt = b + w*t
+  puts at >= bt ? "YES" : "NO"
+else
+  at = a - v*t
+  bt = b - w*t
+  puts at <= bt ? "YES" : "NO"
 end
 
-puts min != INF ? min : -1
+
+# 1 2
+# 3 1
+# 3

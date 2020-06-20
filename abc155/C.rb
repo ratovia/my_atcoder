@@ -13,22 +13,24 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-require 'pry'
 n = gets.to_i
 # a,b,c = gets.split.map(&:to_i)
 
 s = [*1..n].map { |_| gets.chomp }
-binding.pry
-g = s.group_by(&:itself).map{|k,v| [k, v.count]}
+g = s.group_by(&:itself).map{|k,v| [k,v.count]}.to_h
 
-max_str = []
-max_num = 0
 
-g.each do |line|
-  if max_num < line[1]
-    max_num = line[1]
-    max_str.push(line[0])
-  elsif max_num = line[1]
-    max_str.push()
+max_count = 0
+max_res = []
+g.each do |k,v|
+  if v > max_count
+    max_res = [k]
+    max_count = v
+  elsif v == max_count
+    max_res.push(k)
   end
+end
+
+max_res.sort.each do |ele|
+  puts ele
 end

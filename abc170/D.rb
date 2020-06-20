@@ -1,6 +1,6 @@
 ### SNIPPET
   # n = gets.split.map(&:to_i)
-  
+  # array = n.times.map { gets.split.map(&:to_i) }
   # [].all?(&:even?)
   # a = [*1..m].repeated_combination(n).to_a
   # [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
@@ -11,27 +11,19 @@
   # PI = Math::PI
   # 高さ = a * Math.sin(w / 180.0 * Math::PI), 底辺 = a * Math.cos(w / 180.0 * Math::PI)
   # def chmax(a, b) a > b ? a : b end
-INF = Float::INFINITY
-def chmin(a, b) a < b ? a : b end
+  # INF = Float::INFINITY
+  # def chmin(a, b) a < b ? a : b end
+n = gets.to_i
+a= gets.split.map(&:to_i)
 
-n,m,x = gets.split.map(&:to_i)
-
-book_list = n.times.map { gets.split.map(&:to_i) }
-
-min = INF
-0.upto(2 ** n) do |i|
-  select_book_cost = 0
-  select_book_skill = Array.new(m, 0)
-  n.times do |j| 
-    if i[j] == 1
-      select_book_cost += book_list[j][0]
-
-      m.times do |k|
-        select_book_skill[k] += book_list[j][k]
-      end
+res = a.dup
+a.each do |ele|
+  res.each do |r|
+    next if ele == r
+    if r % ele == 0
+      res.delete(r)
     end
   end
-  chmin(min, select_book_cost) if select_book_skill.all?{|skill| skill >= x}
 end
 
-puts min != INF ? min : -1
+puts res.group_by(&:itself).map{|k,v| k if v.count == 1}.compact.length
