@@ -11,21 +11,22 @@
   # PI = Math::PI
   # 高さ = a * Math.sin(w / 180.0 * Math::PI), 底辺 = a * Math.cos(w / 180.0 * Math::PI)
   # def chmax(a, b) a > b ? a : b end
-  INF = Float::INFINITY
+  # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-n,m,k = gets.split.map(&:to_i)
-a = gets.split.map(&:to_i)
-b = gets.split.map(&:to_i)
+n = gets.chomp.split("").map(&:to_i)
 
-1.upto(n-1) do |i|
-  a[i] += a[i-1]
+
+if n.join("").to_i == 10000
+  puts 0
+  exit
+elsif n.join("").to_i % 1000 == 0
+  puts 0
+  exit
+elsif n.length < 4
+  puts 1000 - n.join("").to_i
+  exit
 end
+k = n[0]
 
-1.upto(m-1) do |i|
-  b[i] += b[i-1]
-end
-
-
-pp a
-
+puts (k.to_i+1) * 1000 - n.join("").to_i

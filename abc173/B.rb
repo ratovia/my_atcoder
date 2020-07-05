@@ -11,21 +11,20 @@
   # PI = Math::PI
   # 高さ = a * Math.sin(w / 180.0 * Math::PI), 底辺 = a * Math.cos(w / 180.0 * Math::PI)
   # def chmax(a, b) a > b ? a : b end
-  INF = Float::INFINITY
+  # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-n,m,k = gets.split.map(&:to_i)
-a = gets.split.map(&:to_i)
-b = gets.split.map(&:to_i)
+n = gets.to_i
+array = n.times.map { gets.chomp }
 
-1.upto(n-1) do |i|
-  a[i] += a[i-1]
-end
+res = array.group_by(&:itself).map{|k,v| [k, v.count]}.to_h
 
-1.upto(m-1) do |i|
-  b[i] += b[i-1]
-end
+res['AC'] = 0 if res['AC'] == nil
+res['WA'] = 0 if res['WA'] == nil
+res['TLE'] = 0 if res['TLE'] == nil
+res['RE'] = 0 if res['RE'] == nil
 
-
-pp a
-
+puts "AC x #{res['AC']}"
+puts "WA x #{res['WA']}"
+puts "TLE x #{res['TLE']}"
+puts "RE x #{res['RE']}"
