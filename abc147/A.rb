@@ -14,5 +14,6 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-n = gets.to_i
 a,b,c = gets.split.map(&:to_i)
+
+puts (a+b+c) >= 22 ? "bust" : "win"

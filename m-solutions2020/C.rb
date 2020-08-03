@@ -11,14 +11,31 @@
   # PI = Math::PI
   # 高さ = a * Math.sin(w / 180.0 * Math::PI), 底辺 = a * Math.cos(w / 180.0 * Math::PI)
   # def chmax(a, b) a > b ? a : b end
-  # INF = Float::INFINITY
+  INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s = gets.chomp
+n,k  = gets.split.map(&:to_i)
+a = gets.split.map(&:to_i)
 
-count = 0
-1.upto(s.length/2) do |i|
-  count += 1 if s[i-1] != s[-i] 
+
+a.each_with_index do |ele,index|
+  next if index == 0
+  a[index] *= a[index - 1]
 end
 
-puts count
+# back = 1
+# k.times do |kl|
+#   back *= a[k-(kl+1)]
+# end
+# pp a
+(k-1).upto(n-1) do |i|
+  back = a[i-1] / a[i - k - 1]
+  jyou = a[i] / a[i - k]
+  if i == (k-1)
+  elsif back < jyou
+    puts "Yes"
+  else
+    puts "No"
+  end
+end
+

@@ -1,4 +1,5 @@
 ### SNIPPET
+### SNIPPET
   # n = gets.split.map(&:to_i)
   # array = n.times.map { gets.split.map(&:to_i) }
   # [].all?(&:even?)
@@ -14,11 +15,18 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s = gets.chomp
+a,b,c = gets.split.map(&:to_i)
+k = gets.to_i
 
 count = 0
-1.upto(s.length/2) do |i|
-  count += 1 if s[i-1] != s[-i] 
+while a >= b
+  b = b * 2
+  count += 1
 end
 
-puts count
+while b >= c
+  c = c * 2
+  count += 1
+end
+
+puts count <= k ? "Yes" : "No"

@@ -14,11 +14,22 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s = gets.chomp
+x = gets.to_i
 
-count = 0
-1.upto(s.length/2) do |i|
-  count += 1 if s[i-1] != s[-i] 
+if 400 <= x && 599 >= x 
+  puts "8"
+elsif 600 <= x && 799 >= x
+  puts "7"
+elsif 800 <= x && 999 >= x
+  puts "6"
+elsif 1000 <= x && 1199 >= x
+  puts "5"
+elsif 1200 <= x && 1399 >= x
+  puts "4"
+elsif 1400 <= x && 1599 >= x
+  puts "3"
+elsif 1600 <= x && 1799 >= x
+  puts "2"
+elsif 1800 <= x && 1999 >= x
+  puts "1"
 end
-
-puts count

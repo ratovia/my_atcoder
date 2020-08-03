@@ -13,12 +13,45 @@
   # def chmax(a, b) a > b ? a : b end
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
+n = gets.to_i
+array = gets.chomp.split("")
 
-s = gets.chomp
-
+# first_W = []
 count = 0
-1.upto(s.length/2) do |i|
-  count += 1 if s[i-1] != s[-i] 
+# 0.upto(array.length - 1) do |i|
+#   if array[i] == "W"
+#     first_W.push(i) 
+#   else
+#     if first_W.length > 0
+#       wi = first_W.shift
+#       array[wi] = "R"
+#       array[i] = "W"
+#       first_W.unshift(i)
+#       count += 1
+#     end
+#   end
+#   # binding.pry
+# end
+
+# puts count
+
+left = 0
+right = n - 1
+
+while left <= right do
+  if array[right] == "W"
+    right -= 1
+  elsif array[right] == "R"
+    if array[left] == "W"
+      array[left] = "R"
+      array[right] = "W"
+      count += 1
+      left += 1
+      right -= 1
+    elsif array[left] == "R"
+      left += 1
+    end
+  end
 end
 
 puts count

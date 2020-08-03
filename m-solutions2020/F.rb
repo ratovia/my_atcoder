@@ -14,11 +14,5 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s = gets.chomp
-
-count = 0
-1.upto(s.length/2) do |i|
-  count += 1 if s[i-1] != s[-i] 
-end
-
-puts count
+n = gets.to_i
+a,b,c = gets.split.map(&:to_i)

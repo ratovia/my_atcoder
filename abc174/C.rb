@@ -14,11 +14,18 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s = gets.chomp
-
-count = 0
-1.upto(s.length/2) do |i|
-  count += 1 if s[i-1] != s[-i] 
+k = gets.to_i
+res = nil
+if k % 2 == 0
+else
+  (10**6).downto(k) do |i|
+    if i % 7*k == 0
+      res = i
+    end  
+  end
 end
-
-puts count
+if res.nil?
+  puts "-1" 
+else
+  puts res.to_s.length 
+end

@@ -14,11 +14,15 @@
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
-s = gets.chomp
+n,d = gets.split.map(&:to_i)
+array = n.times.map { gets.split.map(&:to_i) }
 
 count = 0
-1.upto(s.length/2) do |i|
-  count += 1 if s[i-1] != s[-i] 
+array.each do |x,y|
+  if d*d >= x*x + y*y
+    count += 1
+  end
 end
 
-puts count
+puts count 
+  

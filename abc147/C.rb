@@ -10,9 +10,54 @@
   # 公約数125.gcd(100)、公倍数125.lcm(100)
   # PI = Math::PI
   # 高さ = a * Math.sin(w / 180.0 * Math::PI), 底辺 = a * Math.cos(w / 180.0 * Math::PI)
-  # def chmax(a, b) a > b ? a : b end
+  def chmax(a, b) a > b ? a : b end
   # INF = Float::INFINITY
   # def chmin(a, b) a < b ? a : b end
 
+  require 'Set'
 n = gets.to_i
-a,b,c = gets.split.map(&:to_i)
+wit = [nil]
+n.times do 
+  a = gets.to_i
+  xy = []
+  a.times do
+    xy << gets.split.map(&:to_i)
+  end
+  wit << xy
+end
+
+pp wit
+max_num = 0
+1.upto(n) do |i|
+  trust = Set.new
+  untrust = Set.new
+  trust.add(i)
+  flag = true
+  queue = [i]
+  while queue.length > 0
+    j = queue.pop
+    wit[j].each do |array|
+      if array[1] == 1
+        if untrust.include?(array[0])
+          # 矛盾
+          flag = false
+          break
+        else
+          trust.add(array[0])
+        end
+      else
+        if trust.include?(array[0])
+          # 矛盾
+          flag = false
+          break
+        else
+          untrust.add(array[0])
+        end
+      end
+    end
+  end
+  puts "#{j} #{max_num}"
+  max_num = chmax(max_num, trust.length) if flag
+end
+
+puts max_num
