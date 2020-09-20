@@ -2,14 +2,25 @@
 # readlines.map(&:chomp!).map { |e| e.split.map(&:to_i) }
 # gets.split.map(&:to_i)
 
+# n,a,b = gets.split.map(&:to_i)
+
+# sum = 0
+# n.times do |i|
+#   num = (i+1).to_s.split("").map { |s| s.to_i }.inject(:+)
+#   if a <= num && num <= b
+#     sum += i+1
+#   end
+# end
+
+# puts sum
+
+
 n,a,b = gets.split.map(&:to_i)
 
 sum = 0
-n.times do |i|
-  num = (i+1).to_s.split("").map { |s| s.to_i }.inject(:+)
-  if a <= num && num <= b
-    sum += i+1
-  end
+1.upto(n) do |i|
+  val = i.to_s.split("").map(&:to_i).inject(:+)
+  sum += i if a <= val && b >= val
 end
 
-puts sum
+puts sum 
