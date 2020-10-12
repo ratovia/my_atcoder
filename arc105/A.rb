@@ -15,10 +15,28 @@
   # def chmin(a, b) a < b ? a : b end
   # [2,4,6].each_with_index.sort
 
-s = gets.chomp
-t = gets.chomp
+  # n = gets.to_i
+  # a,b,c = gets.split.map(&:to_i)
+
   
-puts s == "Y" ? t.upcase : t
+a,b,c,d = gets.split.map(&:to_i).sort
 
 
+flag = false
+[true,false].each do |ai|
+  [true,false].each do |bi|
+    [true,false].each do |ci|
+      [true,false].each do |di|
+        sum = 0
+        n_sum = 0
+        ai ? sum += a : n_sum += a
+        bi ? sum += b : n_sum += b
+        ci ? sum += c : n_sum += c
+        di ? sum += d : n_sum += d
+        flag = true if sum == n_sum
+      end
+    end
+  end
+end
 
+puts flag ? "Yes" : "No"
