@@ -4,3 +4,4 @@
 cookie-store
 Gemfile.lock
 */spec/
+bin/*

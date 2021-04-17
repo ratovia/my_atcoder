@@ -1,39 +1,38 @@
-# frozen_string_literal: true
-
-s1 = gets.chomp
-s2 = gets.chomp
-s3 = gets.chomp
-
-require 'set'
-require 'pry'
-def solve(s1,s2,s3)
-  words = s1 + s2 + s3
-  chars = Set.new words.each_char
-  abort 'UNSOLVABLE' if chars.size > 10
-  binding.pry
-  first_chars = Set.new words.split("").select { |w| w.size > 1 }.map { |w| w[0] }
-  n = first_chars.size
-  sorted_chars = first_chars.to_a.join + (chars - first_chars).to_a.join
-  %w[0 1 2 3 4 5 6 7 8 9].permutation(chars.size).each do |guess|
-    next if guess[0, n].member? '0'
-
-    expr = puzzle.tr sorted_chars, guess.join
-    return expr if eval expr
+s1 = gets.chomp.chars
+s2 = gets.chomp.chars
+s3 = gets.chomp.chars
+all = []
+[s1,s2,s3].each do |s|
+  s.each do |c|
+    all << c
   end
-  nil
 end
-
-str = solve(s1.upcase, s2.upcase, s3.upcase)
-
-if str.nil?
-  puts 'UNSOLVABLE'
+all.uniq!
+if all.size > 10
+  puts "UNSOLVABLE"
 else
-  ary = str.delete('+').delete('==').split(' ')
-  if ary.include?('0')
-    puts 'UNSOLVABLE'
-  else
-    ary.each do |ar|
-      puts ar
+  hash = {}
+  all.each_with_index.each do |c,id|
+    hash[c] = id
+  end
+  s1 = s1.map{|c| hash[c]}
+  s2 = s2.map{|c| hash[c]}
+  s3 = s3.map{|c| hash[c]}
+  (0..9).to_a.permutation(all.size).each do |pattern|
+    next if pattern[s1[0]] * pattern[s2[0]] * pattern[s3[0]] == 0
+    next if (pattern[s1[-1]] + pattern[s2[-1]]) % 10 != pattern[s3[-1]]
+    nums = []
+    [s1,s2,s3].each do |s|
+      sum = 0
+      s.each_with_index do |num,id|
+        sum = 10 * sum + pattern[num]
+      end
+      nums << sum
+    end
+    if nums[0..1].sum == nums[-1]
+      puts nums
+      exit
     end
   end
+  puts "UNSOLVABLE"
 end
