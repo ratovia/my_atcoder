@@ -1,0 +1,21 @@
+{
+  "files.associations": {
+    "*.tsx": "typescriptreact",
+    "__split_buffer": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "vector": "cpp",
+    "queue": "cpp",
+    "__locale": "cpp",
+    "iostream": "cpp",
+    "iosfwd": "cpp",
+    "__bit_reference": "cpp",
+    "algorithm": "cpp",
+    "bitset": "cpp",
+    "chrono": "cpp",
+    "map": "cpp",
+    "set": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp"
+  }
+}
