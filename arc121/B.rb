@@ -17,4 +17,3 @@ g_num = g_num % 2 == 0
 b_num = b_num % 2 == 0
 
 if !r_num
-  
