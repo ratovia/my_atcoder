@@ -1,7 +1,7 @@
 a,b = gets.split.map(&:to_i)
 
-if b >= a && b <= a * 6
-  puts "Yes"
+if a > b
+  puts 0
 else
-  puts "No"
+  puts b - a + 1
 end
